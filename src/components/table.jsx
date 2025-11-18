@@ -41,7 +41,6 @@ export default function CustomDataTable({ data }) {
   }
 
   return (
-    // Paper provides the elevated card look; TableContainer enables scrolling
     <TableContainer component={Paper} style={{width: '100%', maxHeight: '70vh'}}>
       <Table  aria-label="company data table">
         {/* === TABLE HEADER === */}
@@ -59,20 +58,16 @@ export default function CustomDataTable({ data }) {
           </TableRow>
         </TableHead>
 
-        {/* === TABLE BODY === */}
         <TableBody>
           {data.map((row, index) => (
-            // Apply a unique key for each row for React performance
             <TableRow
               key={row.name || index}
-              // Basic zebra striping for visual separation
               sx={{ "&:nth-of-type(odd)": { backgroundColor: "#f9f9f9" } }}
             >
               {columnHeaders.map((column) => (
                 <TableCell
                   key={column.key}
                   align={column.align}
-                  // Apply specific styles to the description cell to truncate text
                   {...(column.key === "description" && {
                     sx: {
                       whiteSpace: "normal",
@@ -81,7 +76,6 @@ export default function CustomDataTable({ data }) {
                     },
                   })}
                 >
-                  {/* Access the row data using the dynamic column key */}
                   {row[column.key]}
                 </TableCell>
               ))}

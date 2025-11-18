@@ -16,24 +16,21 @@ function App() {
   const [filteredData, setFilteredData] = useState(companyData);
   const [currentPage, setCurrentPage] = useState(1);
 
-  // Function to handle changes in the filter text fields
   const handleFilterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
     setFilters(prevFilters => ({
       ...prevFilters,
       [name]: value.toLowerCase(),
     }));
-    setCurrentPage(1); // Reset to first page when filters change
+    setCurrentPage(1); 
   };
 
-  // Filtering Logic (Runs whenever filters state changes)
   useEffect(() => {
     const applyFilters = () => {
       let currentData = companyData;
       
       const { name, location, serviceType } = filters;
 
-      // Filter the data based on ALL active filters
       const newFilteredData = currentData.filter(item => {
         const matchesName = item.name.toLowerCase().includes(name);
         const matchesLocation = item.location.toLowerCase().includes(location);
@@ -48,16 +45,14 @@ function App() {
     applyFilters();
   }, [filters]);
 
-  // Calculate pagination values
   const totalPages = Math.ceil(filteredData.length / ITEMS_PER_PAGE);
   const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
   const endIndex = startIndex + ITEMS_PER_PAGE;
   const paginatedData = filteredData.slice(startIndex, endIndex);
 
-  // Handle page change
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  function handlePageChange(_event: React.ChangeEvent<unknown>, page: number) {
     setCurrentPage(page);
-  };
+  }
 
   return (
     <div style={{ 
@@ -66,14 +61,13 @@ function App() {
       alignItems: 'center', 
       justifyContent: 'center',
       width: '100vw',
-      // padding: '20px',
       minHeight: '100vh',
       backgroundColor: '#f5f5f5',
       boxSizing: 'border-box'
     }}>
       <h2 style={{color:'black'}}>Companies Directory</h2>
 
-      {/* Filter Bar */}
+     
       <Box 
         sx={{ 
           display: 'flex', 
@@ -84,7 +78,6 @@ function App() {
           border: '1px solid #ccc', 
           borderRadius: '4px',
           width: '90%',
-          // maxWidth: '1000px'
         }}
       >
         <TextField
@@ -116,17 +109,14 @@ function App() {
         />
       </Box>
 
-      {/* Results Info */}
       <Box sx={{ mb: 2, fontSize: '14px', color: '#666' }}>
         Showing {startIndex + 1} to {Math.min(endIndex, filteredData.length)} of {filteredData.length} companies
       </Box>
 
-      {/* Data Table */}
       <Box sx={{ width: '100%', maxWidth: '1000px', mb: 3 }}>
         <CustomDataTable data={paginatedData} />
       </Box>
 
-      {/* Pagination Component */}
       {totalPages > 1 && (
         <Box sx={{ display: 'flex', justifyContent: 'center', my: 2 }}>
           <Pagination
