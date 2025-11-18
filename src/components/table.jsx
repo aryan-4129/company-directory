@@ -27,6 +27,9 @@ export default function CustomDataTable({ data }) {
       <Box
         sx={{
           display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
           gap: 2,
           mb: 3,
           p: 2,
