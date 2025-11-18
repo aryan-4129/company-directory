@@ -33,6 +33,7 @@ export default function CustomDataTable({ data }) {
           gap: 2,
           mb: 3,
           p: 2,
+          color:"black",
           backgroundColor: "white",
           border: "1px solid #ccc",
           borderRadius: "4px",
