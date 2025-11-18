@@ -55,7 +55,7 @@ function App() {
   const paginatedData = filteredData.slice(startIndex, endIndex);
 
   // Handle page change
-  const handlePageChange = (event: React.ChangeEvent<unknown>, page: number) => {
+  const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
 
